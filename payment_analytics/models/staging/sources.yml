@@ -1,0 +1,46 @@
+version: 2
+
+sources:
+
+  - name: paystack
+    schema: raw
+
+    tables:
+
+      - name: paystack_transactions
+        description: Raw Paystack transaction data.
+
+        columns:
+
+          - name: transaction_id
+            data_tests:
+              - unique
+              - not_null
+
+          - name: raw_payload
+            data_tests:
+              - not_null
+
+
+  - name: synthetic
+    schema: raw
+
+    tables:
+
+      - name: synthetic_transactions
+        description: Synthetic payment transactions generated for analytics testing.
+
+        columns:
+
+          - name: transaction_id
+            data_tests:
+              - unique
+              - not_null
+
+          - name: reference
+            data_tests:
+              - not_null
+
+          - name: raw_payload
+            data_tests:
+              - not_null

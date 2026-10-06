@@ -1,0 +1,146 @@
+version: 2
+
+models:
+
+  - name: fact_transactions
+    description: Transaction-level fact table combining Paystack and synthetic payment transactions.
+
+    columns:
+
+      - name: transaction_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: transaction_reference
+        data_tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        data_tests:
+          - not_null
+
+      - name: transaction_status
+        data_tests:
+          - not_null
+
+      - name: amount_ngn
+        data_tests:
+          - not_null
+
+      - name: currency
+        data_tests:
+          - not_null
+
+      - name: data_source
+        data_tests:
+          - not_null
+
+
+  - name: dim_customers
+    description: Customer-level transaction summary across all payment sources.
+
+    columns:
+
+      - name: customer_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: total_transactions
+        data_tests:
+          - not_null
+
+      - name: total_amount_ngn
+        data_tests:
+          - not_null
+
+      - name: successful_transactions
+        data_tests:
+          - not_null
+
+      - name: failed_transactions
+        data_tests:
+          - not_null
+
+
+  - name: mart_daily_payment_metrics
+    description: Daily payment performance metrics by currency, payment channel, and data source.
+
+    columns:
+
+      - name: transaction_date
+        data_tests:
+          - not_null
+
+      - name: currency
+        data_tests:
+          - not_null
+
+      - name: payment_channel
+        data_tests:
+          - not_null
+
+      - name: data_source
+        data_tests:
+          - not_null
+
+      - name: total_transactions
+        data_tests:
+          - not_null
+
+      - name: successful_transactions
+        data_tests:
+          - not_null
+
+      - name: failed_transactions
+        data_tests:
+          - not_null
+
+      - name: total_transaction_value_ngn
+        data_tests:
+          - not_null
+
+      - name: success_rate
+        data_tests:
+          - not_null
+
+
+  - name: mart_reconciliation
+    description: Reconciliation checks comparing raw source transactions with transformed fact transactions.
+
+    columns:
+
+      - name: data_source
+        data_tests:
+          - unique
+          - not_null
+
+      - name: source_transaction_count
+        data_tests:
+          - not_null
+
+      - name: fact_transaction_count
+        data_tests:
+          - not_null
+
+      - name: source_amount_ngn
+        data_tests:
+          - not_null
+
+      - name: fact_amount_ngn
+        data_tests:
+          - not_null
+
+      - name: transaction_count_difference
+        data_tests:
+          - not_null
+
+      - name: amount_difference_ngn
+        data_tests:
+          - not_null
+
+      - name: reconciliation_status
+        data_tests:
+          - not_null

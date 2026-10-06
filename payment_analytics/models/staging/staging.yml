@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: stg_paystack_transactions
+    description: Cleaned and standardized Paystack transactions.
+
+    columns:
+      - name: transaction_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: transaction_reference
+        data_tests:
+          - not_null
+
+      - name: transaction_status
+        data_tests:
+          - not_null
+
+      - name: amount_kobo
+        data_tests:
+          - not_null
+
+      - name: currency
+        data_tests:
+          - not_null
