@@ -1,0 +1,55 @@
+version: 2
+
+models:
+
+  - name: int_transactions
+    description: Cleaned transaction data with reusable business logic and derived transaction indicators.
+
+    columns:
+
+      - name: transaction_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: transaction_status
+        data_tests:
+          - not_null
+          - accepted_values:
+              values:
+                - success
+                - failed
+                - abandoned
+                - pending
+
+      - name: amount_ngn
+        data_tests:
+          - not_null
+
+      - name: currency
+        data_tests:
+          - not_null
+
+      - name: data_source
+        data_tests:
+          - not_null
+          - accepted_values:
+              values:
+                - paystack
+                - synthetic
+
+      - name: is_successful
+        data_tests:
+          - not_null
+
+      - name: is_failed
+        data_tests:
+          - not_null
+
+      - name: is_unresolved
+        data_tests:
+          - not_null
+
+      - name: transaction_date
+        data_tests:
+          - not_null

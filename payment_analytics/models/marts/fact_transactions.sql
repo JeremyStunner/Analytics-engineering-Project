@@ -10,5 +10,9 @@ SELECT
     transaction_created_at,
     transaction_paid_at,
     ingested_at,
-    data_source
-FROM {{ ref('stg_transactions') }}
+    data_source,
+    is_successful,
+    is_failed,
+    is_unresolved,
+    transaction_date
+FROM {{ ref('int_transactions') }}
